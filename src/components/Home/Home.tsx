@@ -1,9 +1,7 @@
-import React from 'react'
-
 const Home = () => {
   return (
-    <div>Home</div>
-  )
-}
+   <div className="h-screen bg-[#4287f5]"></div>
+  );
+};
 
-export default Home
+export default Home;
