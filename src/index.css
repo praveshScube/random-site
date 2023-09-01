@@ -1,3 +1,180 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Poppins Thin";
+    src: url("./assets/fonts/Poppins-Thin.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins ThinItalic";
+    src: url("./assets/fonts/Poppins-ThinItalic.ttf") format("truetype");
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Poppins Light";
+    src: url("./assets/fonts/Poppins-Light.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  @font-face {
+    font-family: "Poppins LightItalic";
+    src: url("./assets/fonts/Poppins-LightItalic.ttf") format("truetype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins Regular";
+    src: url("./assets/fonts/Poppins-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins Italic";
+    src: url("./assets/fonts/Poppins-Italic.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins Medium";
+    src: url("./assets/fonts/Poppins-Medium.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins MediumItalic";
+    src: url("./assets/fonts/Poppins-MediumItalic.ttf") format("truetype");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins SemiBold";
+    src: url("./assets/fonts/Poppins-SemiBold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins SemiBoldItalic";
+    src: url("./assets/fonts/Poppins-SemiBoldItalic.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins Bold";
+    src: url("./assets/fonts/Poppins-Bold.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins BoldItalic";
+    src: url("./assets/fonts/Poppins-BoldItalic.ttf") format("truetype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins ExtraBold";
+    src: url("./assets/fonts/Poppins-ExtraBold.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins ExtraBoldItalic";
+    src: url("./assets/fonts/Poppins-ExtraBoldItalic.ttf") format("truetype");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins Black";
+    src: url("./assets/fonts/Poppins-Black.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: "Poppins BlackItalic";
+    src: url("./assets/fonts/Poppins-BlackItalic.ttf") format("truetype");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  body {
+    font-family: "Poppins", sans-serif;
+  }
+
+.shrink {
+    height: 56px;
+    transition: height 0.3s ease-in-out;
+}
+
+.ball {
+  display: block;
+  background: black;
+  margin: 0;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background: radial-gradient(circle at 100px 100px, #ffffff, #001581);
+}
+
+.ball .shadow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 50%);
+  transform: rotateX(90deg) translateZ(-150px);  
+  z-index: -1;
+  -webkit-transform: rotateX(90deg) translateZ(-150px);  
+}
+
+.ball .shadow2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.4), rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 50%);
+  transform: rotateX(90deg) translateZ(-150px);  
+  z-index: -1;
+  -webkit-transform: rotateX(90deg) translateZ(-150px);  
+}
+
+.pTag{
+  background-color: linear-gradient(to right, #ffffff 50%, #252525 50%);
+  background-size: 200% 100%;
+  background-position-x: 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin: 20px 0px 20px 50px;
+  user-select: none;
+}
