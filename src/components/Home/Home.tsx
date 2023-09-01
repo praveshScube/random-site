@@ -50,7 +50,7 @@ const Home = () => {
 
   return (
     <div>
-      <div className="h-screen homeBg z-10 overflow-hidden">
+      <div className="h-screen w-full homeBg z-10 overflow-hidden">
         <div className="pt-[200px] banner overflow-hidden flex justify-center items-center">
           <div className="circle relative border-2 border-[#267aff] w-[400px] h-[400px] rounded-full m-8">
             <figure className="ball sphere1 shadow-md absolute top-0 right-20 h-[50px] rounded-full">
