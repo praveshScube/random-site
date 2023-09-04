@@ -31,15 +31,15 @@ const NavBar = () => {
     );
     gsap.to(".active-nav", {
       xPercent: pathname.includes("contact")
-        ? navIndex * 271
+        ? navIndex * 269
         : pathname.includes("services")
-        ? navIndex * 264
+        ? navIndex * 255
         : pathname.includes("about")
-        ? navIndex * 180
+        ? navIndex * 198
         : navIndex === 3
         ? navIndex * 24
         : pathname.includes("home")
-        ? navIndex * 74
+        ? navIndex * 80
         : navIndex * 0,
       backgroundColor: `${
         pathname.includes("home")
@@ -79,59 +79,128 @@ const NavBar = () => {
         { yPercent: -100, backgroundColor: "#ffffff" },
         {
           yPercent: 0,
-          backgroundColor: '#cccccc',
+          backgroundColor: `${
+            pathname.includes("home")
+              ? "#edf4ff"
+              : pathname.includes("about")
+              ? "#e3fff2"
+              : pathname.includes("services")
+              ? "#ffefed"
+              : "#fff3d4"
+          }`,
           duration: 2,
         }
       );
-      const menuClasses = document.querySelectorAll('.menuLink')
-      let tl = gsap.timeline( {repeat:0, repeatDelay: 0, delay: 2} );
+      const menuClasses = document.querySelectorAll(".menuLink");
+      let tl = gsap.timeline({ repeat: 0, repeatDelay: 0, delay: 2 });
       tl.fromTo(
         menuClasses,
         {
           xPercent: -100,
-          ease: 'none',
+          ease: "none",
         },
         {
           xPercent: 0,
-          ease: 'none',
-          duration: .5,
+          ease: "none",
+          duration: 0.5,
           stagger: 0.3,
         }
       );
     } else if (!menu) {
-      gsap.fromTo(
-        ".menuWrapper",
-        { yPercent: 0, backgroundColor: "#ffffff" },
-        {
-          yPercent: -100,
-          backgroundColor: '#cccccc',
-          duration: 2,
-          delay:.5
-        }
-      );
-      const menuClasses = document.querySelectorAll('.menuLink')
-      let tl = gsap.timeline( {repeat:0, repeatDelay: 0} );
+      const menuClasses = document.querySelectorAll(".menuLink");
+      let tl = gsap.timeline({ repeat: 0, repeatDelay: 0, delay: 0 });
       tl.fromTo(
         menuClasses,
         {
           xPercent: 0,
-          ease: 'none',
+          ease: "none",
         },
         {
           xPercent: -100,
-          ease: 'none',
-          duration: .5,
+          ease: "none",
+          duration: 0.5,
           stagger: 0.3,
+        }
+      );
+      gsap.fromTo(
+        ".menuWrapper",
+        { yPercent: 0 },
+        {
+          yPercent: -100,
+          backgroundColor: `${
+            pathname.includes("home")
+              ? "#edf4ff"
+              : pathname.includes("about")
+              ? "#e3fff2"
+              : pathname.includes("services")
+              ? "#ffefed"
+              : "#fff3d4"
+          }`,
+          duration: 2,
+          delay: 1.5,
         }
       );
     }
   }, [menu]);
 
+  useEffect(()=>{
+    const menuClasses = document.querySelectorAll(".menuLink");
+      menuClasses.forEach((ele) => {
+        gsap.set(
+          ele,
+          {
+            xPercent: -100,
+          },
+        );
+      });
+  },[])
+
+  useEffect(() => {
+    const sphere1 = document.querySelectorAll(".sphere1");
+    const sphere2 = document.querySelectorAll(".sphere2");
+    let tl = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+    let tl2 = gsap.timeline({ repeat: -1, repeatDelay: 0 });
+    tl.to(sphere1, {
+      duration: 10,
+      rotation: 360,
+      transformOrigin: "-11px 23px",
+      ease: "none",
+      stagger: {
+        each: 2,
+        from: "center",
+      },
+    });
+    tl2.to(sphere2, {
+      duration: 10,
+      rotation: 360,
+      transformOrigin: "23px -11px",
+      ease: "none",
+      stagger: {
+        each: 2,
+        from: "center",
+      },
+    });
+  }, []);
+
   return (
     <>
-      <div className="absolute top-6 right-12 z-30 sm:hidden">
+      <div className="w-full h-[75px] absolute px-4 flex justify-between items-center z-50 sm:hidden">
+        <div className="cursor-pointer flex relative justify-start items-center w-[49px] h-[49px] border-2 border-[#267aff] rounded-full">
+          <figure className="ball sphere1 shadow-md absolute top-0 right-0 rounded-full">
+            <span className="shadow"></span>
+          </figure>
+          <figure className="ball sphere2 shadow-md absolute bottom-0 left-0 rounded-full">
+            <span className="shadow2"></span>
+          </figure>
+          <NavLink
+            to={"/home"}
+            className={`font-black text-fontBlack text-4xl cursor-pointer p-2`}
+          >
+            <span className="pl-1">P</span>
+          </NavLink>
+        </div>
         <div onClick={menuOpenClose} className="cursor-pointer">
-          <img src={MenuIcon} alt="" />
+          {menu ? <span>X</span> : <img src={MenuIcon} alt="" />}
         </div>
       </div>
       <nav
@@ -175,13 +244,23 @@ const NavBar = () => {
           >
             About
           </NavLink>
-          <NavLink
-            to={"/home"}
+          <span
             onClick={() => setNavIndex(3)}
-            className={`font-black text-fontBlack text-4xl cursor-pointer p-2`}
+            className="cursor-pointer flex relative justify-start items-center w-[50px] h-[50px] border-2 border-[#267aff] rounded-full"
           >
-            Pravesh.
-          </NavLink>
+            <figure className="ball sphere1 shadow-md absolute top-0 right-0 rounded-full">
+              <span className="shadow"></span>
+            </figure>
+            <figure className="ball sphere2 shadow-md absolute bottom-0 left-0 rounded-full">
+              <span className="shadow2"></span>
+            </figure>
+            <NavLink
+              to={"/home"}
+              className={`font-black text-fontBlack text-4xl cursor-pointer p-2`}
+            >
+              <span className="pl-1 pb-1">P</span>
+            </NavLink>
+          </span>
           <NavLink
             className={({ isActive }) =>
               isActive
@@ -209,61 +288,56 @@ const NavBar = () => {
 
       {/* mobile menu */}
 
-      <div ref={isFirstRender} className="absolute top-0 left-0 z-40 menuWrapper w-full h-screen sm:hidden">
-        <div className="absolute top-6 right-12 z-30">
-          <div onClick={menuOpenClose} className="cursor-pointer">
-            <img src={MenuIcon} alt="" />
+      <div
+        ref={isFirstRender}
+        className={`absolute top-0 left-0 z-40 menuWrapper w-full h-screen sm:hidden`}
+      >
+          <div className="pt-24 pl-6 flex flex-col justify-start items-starts gap-10">
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[#00000060] menuLink font-bold text-[50px] cursor-pointer p-2"
+                  : "menuLink font-bold text-fontBlack text-[50px] cursor-pointer p-2"
+              }
+              onClick={() => setMenu(false)}
+              to={"/home"}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[#00000060] menuLink font-bold text-[50px] cursor-pointer p-2"
+                  : "menuLink font-bold text-fontBlack text-[50px] cursor-pointer p-2"
+              }
+              onClick={() => setMenu(false)}
+              to={"/about"}
+            >
+              About
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[#00000060] menuLink font-bold text-[50px] cursor-pointer p-2"
+                  : "menuLink font-bold text-fontBlack text-[50px] cursor-pointer p-2"
+              }
+              onClick={() => setMenu(false)}
+              to={"/services"}
+            >
+              Services
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[#00000060] menuLink font-bold text-[50px] cursor-pointer p-2"
+                  : "menuLink font-bold text-fontBlack text-[50px] cursor-pointer p-2"
+              }
+              onClick={() => setMenu(false)}
+              to={"/contact"}
+            >
+              Contact
+            </NavLink>
           </div>
-        </div>
-        {
-          menu &&
-        <div className="pt-28 pl-6 flex flex-col justify-start items-starts gap-14">
-          <NavLink
-            className={({ isActive }) =>
-            isActive
-              ? "text-fontBlack menuLink font-bold text-[60px] cursor-pointer p-2"
-              : "menuLink font-bold text-white text-[60px] cursor-pointer p-2"
-            }
-            onClick={() => setMenu(false)}
-            to={"/home"}
-          >
-            Home
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-fontBlack menuLink font-bold text-[60px] cursor-pointer p-2"
-                : "menuLink font-bold text-white text-[60px] cursor-pointer p-2"
-            }
-            onClick={() => setMenu(false)}
-            to={"/about"}
-          >
-            About
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-fontBlack menuLink font-bold text-[60px] cursor-pointer p-2"
-                : "menuLink font-bold text-white text-[60px] cursor-pointer p-2"
-            }
-            onClick={() => setMenu(false)}
-            to={"/services"}
-          >
-            Services
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "text-fontBlack menuLink font-bold text-[60px] cursor-pointer p-2"
-                : "menuLink font-bold text-white text-[60px] cursor-pointer p-2"
-            }
-            onClick={() => setMenu(false)}
-            to={"/contact"}
-          >
-            Contact
-          </NavLink>
-        </div>
-        }
       </div>
     </>
   );

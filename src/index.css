@@ -131,11 +131,11 @@
   }
   
   body {
-    font-family: "Poppins", sans-serif;
+    /* font-family: "Poppins", sans-serif; */
   }
 
 .shrink {
-    height: 56px;
+    height: 64px;
     transition: height 0.3s ease-in-out;
 }
 
@@ -144,9 +144,9 @@
   background: black;
   margin: 0;
   border-radius: 50%;
-  height: 50px;
-  width: 50px;
-  background: radial-gradient(circle at 100px 100px, #ffffff, #001581);
+  height: 12px;
+  width: 12px;
+  background: radial-gradient(circle at 100px 100px, #ffffff, #267aff);
 }
 
 .ball .shadow {
