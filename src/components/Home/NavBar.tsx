@@ -39,7 +39,7 @@ const NavBar = () => {
         : navIndex === 3
         ? navIndex * 24
         : pathname.includes("home")
-        ? navIndex * 80
+        ? navIndex * 84
         : navIndex * 0,
       backgroundColor: `${
         pathname.includes("home")
