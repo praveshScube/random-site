@@ -1,8 +1,7 @@
+import React, { useEffect, useRef } from "react";
 import { gsap, Linear } from "gsap";
-import { useEffect } from "react";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-gsap.registerPlugin(MotionPathPlugin);
-// import gsap, { Linear } from 'gsap';
+import Section2 from "./Section2";
+import HeroSection from "./HeroSection";
 
 const Home = () => {
   useEffect(() => {
@@ -12,40 +11,6 @@ const Home = () => {
       { xPercent: 0, backgroundColor: "#4287f5", duration: 2 }
     );
     gsap.fromTo(".banner", { xPercent: 350 }, { xPercent: 0, duration: 2 });
-
-  }, []);
-
-  useEffect(() => {
-    const sphere1 = document.querySelectorAll('.sphere1')
-    const sphere2 = document.querySelectorAll('.sphere2')
-    let tl = gsap.timeline( {repeat:-1, repeatDelay: 0} );
-    let tl2 = gsap.timeline( {repeat:-1, repeatDelay: 0} );
-      tl.to(
-        sphere1,
-        {
-          duration: 10,
-          rotation: 360,
-          transformOrigin: '-70px 198px',
-          ease: 'none',
-          stagger: {
-            each: 2,
-            from: 'center'
-          },
-        }
-      );
-      tl2.to(
-        sphere2,
-        {
-          duration: 10,
-          rotation: 360,
-          transformOrigin: '118px -148px',
-          ease: 'none',
-          stagger: {
-            each: 2,
-            from: 'center'
-          },
-        }
-      );
   }, []);
 
   return (
