@@ -51,18 +51,18 @@ const Home = () => {
   return (
     <div>
       <div className="h-screen w-full homeBg z-10 overflow-hidden">
-        <div className="pt-[200px] banner overflow-hidden flex justify-center items-center">
-          <div className="circle relative border-2 border-[#267aff] w-[400px] h-[400px] rounded-full m-8">
+        <div className="w-full pt-[200px] banner overflow-hidden flex justify-center items-center">
+          {/* <div className="circle relative border-2 border-[#267aff] w-[400px] h-[400px] rounded-full m-8 opacity-10">
             <figure className="ball sphere1 shadow-md absolute top-0 right-20 h-[50px] rounded-full">
               <span className="shadow"></span>
             </figure>
             <figure className="ball sphere2 shadow-md absolute bottom-0 left-20 w-[50px] h-[50px] rounded-full">
               <span className="shadow2"></span>
             </figure>
-          </div>
+          </div> */}
+          <div></div>
         </div>
       </div>
-      <div className="h-[500px]"></div>
     </div>
   );
 };
