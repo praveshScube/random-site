@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import coffeebeans from "../../assets/images/coffeebeans.webp";
 import singlecoffeebean from "../../assets/images/singlecoffeebean.webp";
+import me from "../../assets/images/me.webp";
+import githubIcon from "../../assets/icons/githubIcon.webp";
+import linkedinIcon from "../../assets/icons/linkedinIcon.webp";
+// import resume from "../../assets/images/PraveshMalvi2024.pdf";
+import { Link } from "react-router-dom";
+import ScrollTrigger from "gsap/dist/ScrollTrigger";
 
 const Myself = () => {
-  const [slideIndex, setSlideIndex] = useState(1);
+  const containerRef = useRef() as any;
   const creativityList = [
     "Innovative",
-    "Detail-Oriented",
-    "User-Focused",
+    "Meticulous",
+    "Intuitive",
     "Collaborative",
-    "Problem-Solver",
+    "Analytical",
     "Passionate",
   ];
 
-  useEffect(() => {
+  const CreativityList = () => {
     creativityList.forEach((item, index) => {
       gsap.fromTo(
         `.creativityList-${index}`,
@@ -35,158 +41,190 @@ const Myself = () => {
         }
       );
     });
+  };
+
+  useEffect(() => {
+    creativityList.forEach((item, index) => {
+      gsap.fromTo(
+        `.creativityList-${index}`,
+        {
+          opacity: 0,
+        },
+        {
+          opacity: 0,
+          delay: 1,
+          onComplete: () => {
+            CreativityList();
+          },
+        }
+      );
+    });
+    gsap.fromTo(
+      ".textReveal",
+      {
+        height: "100%",
+      },
+      {
+        height: 0,
+        duration: 1.5,
+        delay: 1.5,
+      }
+    );
   }, []);
 
   useEffect(() => {
-    gsap.fromTo(
-      `.boxLeft`,
-      {
-        x: "-150%",
-      },
-      {
-        x: 0,
-        duration: 1,
-        delay: 12,
-      }
-    );
-    gsap.fromTo(
-      `.boxRight`,
-      {
-        x: "150%",
-      },
-      {
-        x: 0,
-        duration: 1,
-        delay: 12,
-      }
-    );
-    gsap.fromTo(
-      `.flowingFreeBg`,
-      {
-        width: "0%",
-      },
-      {
-        width: "100%",
-        duration: 1,
-        delay: 12,
-      }
-    );
+    gsap.to(".singlecoffeebean", {
+      x: "random([0, 1000, 200, 500])",
+      y: "random([200, 10, -1000, 550])",
+      rotate: (i) => "random(360, -360)",
+      rotation: (i, target) =>
+        gsap.getProperty(target, "rotation") === -180 ? 90 : -360,
+      duration: 30,
+      ease: "none",
+      // yoyo: true,
+      repeat: -1,
+      repeatRefresh: true,
+    });
   }, []);
 
-  const handleSlide = () => {
-    if (slideIndex === 1) {
-      setSlideIndex(slideIndex + 1);
-      gsap.fromTo(
-        `.slideAnimate`,
-        {
-          y: 0,
-        },
-        {
-          y: "-200%",
-          duration: 1,
-          onComplete: () => {
-            gsap.to(`.slideAnimate2`, {
-              y: "125%",
-              duration: 1,
-            });
-          },
-        }
-      );
-    }
-    if (slideIndex === 2) {
-      setSlideIndex(slideIndex - 1);
-      gsap.fromTo(
-        `.slideAnimate2`,
-        {
-          y: "125%",
-        },
-        {
-          y: "-40%",
-          duration: 1,
-          onComplete: () => {
-            gsap.to(`.slideAnimate`, {
-              y: 0,
-              duration: 1,
-            });
-          },
-        }
-      );
-    }
-  };
+  useEffect(() => {
+    gsap.set(".cursor", { xPercent: -50, yPercent: -50 });
 
-  const myObject = { key: "value" };
+    let cursor: any = document.querySelector(".cursor");
+
+    let mouseX: any;
+    let mouseY: any;
+
+    window.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      gsap.to(cursor, { x: mouseX, y: mouseY, duration: 0.5 });
+    });
+  }, []);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.to(".section2", {
+      width: "100%",
+      scrollTrigger: {
+        trigger: ".section2",
+        start: "top bottom-=200",
+        end: "center bottom-=200",
+        scrub: 1,
+        markers: true,
+      },
+    });
+  }, []);
+
+//   useEffect(() => {
+//     if (window.innerWidth > 1023) {
+//         gsap.registerPlugin(ScrollTrigger);
+//         let ctx = gsap.context(() => {
+//             gsap.to(".leftPinned", {
+//                 scrollTrigger: {
+//                   start: "top 80px",
+//                   end: "bottom bottom",
+//                     trigger: ".leftPinned",
+//                     endTrigger: ".rightSide",
+//                     pinSpacing: false,
+//                     pin: true,
+//                     scrub: true,
+//                     markers: true,
+//                 },
+//             });
+//         }, containerRef);
+//         return () => ctx.revert();
+//     }
+// }, [window.innerWidth]);
 
   return (
-    <div className="bg-[#000000] w-full h-screen overflow-hidden">
-      <div className="w-full h-full flex flex-col justify-center items-center relative">
-        {creativityList?.map((item: any, index: number) => (
-          <>
-            <p
-              className={`z-10 absolute w-full h-full flex justify-center items-center text-coffeeLight font-black text-[160px] creativityList-${index}`}
-            >
-              {item}
-            </p>
-          </>
-        ))}
-        <div className="z-0 absolute opacity-90 top-0 left-0 w-full h-full">
-          <img
-            className="w-full h-full object-cover object-center shadow-xl"
-            src={coffeebeans}
-            alt=""
-          />
-        </div>
-        <div className="z-20 absolute top-0 left-0 right-0 w-full h-full grid xl:grid-cols-2 grid-cols-1">
-          <div className="w-full h-full flex justify-center items-center boxLeft">
-            <div className="w-[80%] h-full flex flex-col justify-center items-start gap-2">
-              <div className="flex gap-2 w-full h-[100px]">
-                <div className="bg-white/10 backdrop-blur-lg w-[100px] h-[100px]"></div>
-                <div className="bg-white/10 backdrop-blur-lg w-full h-[100px]"></div>
+    <>
+      <section>
+        <div className="bg-coffeeLight w-full h-[100vh] overflow-hidden topPinned">
+          <div className="w-full h-full flex flex-col justify-center items-center relative">
+            {[...Array(5)].map((_, index) => (
+              <div
+                className={`absolute ${
+                  index === 0
+                    ? "top-[20%] left-[10%] w-10"
+                    : index === 1
+                    ? "top-[15%] left-[20%] w-8"
+                    : index === 2
+                    ? "top-[10%] left-[5%] w-12"
+                    : index === 3
+                    ? "bottom-[5%] left-[15%] w-6"
+                    : "bottom-[15%] right-[10%] w-8"
+                } z-10 singlecoffeebean`}
+              >
+                <img className="" src={singlecoffeebean} alt="" />
               </div>
-              <div className=" w-full h-[250px] p-6 flex flex-col justify-start items-start gap-2 overflow-hidden relative">
-                {/* <div className="absolute top-0 right-0 w-10">
-                  <img src={singlecoffeebean} alt="" />
-                </div> */}
-                <p className="slideAnimate text-[24px] text-coffeeLight font-bold ">
-                  Hello! I'm Pravesh,
-                </p>
-                <p className="border-l-[3px] border-coffeeDark pl-2 slideAnimate text-[16px] text-coffeeLight font-normal ">
-                  I am a Frontend Developer, with 1.8 years of experience in
-                  React Js and Next Js. I love building tools that are
-                  user-friendly, simple and delightful. I am experienced in
-                  creating responsive and mobile-friendly websites with
-                  cross-browser compatibility to ensure consistent user
-                  experience across different devices and browsers.
-                </p>
-                <p className="absolute -top-[60%] border-l-[3px] border-coffeeDark pl-2 slideAnimate2 text-[16px] text-coffeeLight font-normal ">
-                  Developed and implemented RESTful API endpoints to facilitate
-                  seamless communication between the frontend and backend
-                  systems. This involved designing and coding endpoints for data
-                  retrieval and submission, ensuring efficient and secure
-                  transmission of information. Collaborated with backend
-                  developers to define API requirements and optimize performance
-                  for enhanced user experience.
-                </p>
-                <div className="bg-white/10 backdrop-blur-lg w-10 h-10 flex justify-center items-center absolute bottom-0 left-0 text-coffeeLight font-normal">{`${slideIndex}/2`}</div>
+            ))}
+            {creativityList?.map((item: any, index: number) => (
+              <>
                 <div
-                  onClick={handleSlide}
-                  className="cursor-pointer bg-white/10 backdrop-blur-lg w-10 h-10 flex justify-center items-center absolute bottom-0 right-0 text-coffeeLight transition-all duration-500"
+                  style={{ fontSize: "12vw" }}
+                  className={`z-10 qanoar absolute w-full h-full flex justify-center items-center text-coffeeDark font-black`}
                 >
-                  {slideIndex === 1 ? ">>" : "<<"}
+                  <div className="relative z-20 flex justify-center items-center">
+                    <span className={`creativityList-${index}`}>{item}</span>
+                    <div className="bg-coffeeLight w-[80%] textReveal absolute top-0"></div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-          <div className="w-full h-full boxRight">
-            <div className="w-full h-full flex justify-center items-center">
-              <div className="w-[80%] h-[400px] flex justify-center items-center">
-                <p className="text-coffeeLight">{JSON.stringify(myObject)}</p>
-              </div>
-            </div>
+              </>
+            ))}
+            <div className="cursor bg-coffeeDark w-[10px] h-[10px] rounded-full absolute top-0 left-0"></div>
           </div>
         </div>
-        <div className="bg-black/50 backdrop-blur-xl h-full absolute top-0 right-0 flowingFreeBg z-10"></div>
-      </div>
-    </div>
+        <div ref={containerRef} className="bg-coffeeLight w-full h-[100vh] flex justify-center items-center relative">
+          <div className="section2 w-[30%] h-full bg-coffeeDark overflow-hidden absolute z-0"></div>
+          <div className="w-full h-full flex justify-center items-center overflow-hidden section2Content z-10 px-16">
+            <div className="w-[40%] h-full flex flex-col justify-center items-center px-8 leftPinned">
+              <div className="w-full relative">
+                <p className="w-full font-normal text-[30px] text-coffeeLight text-left">
+                  I am a
+                </p>
+                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
+              </div>
+              <div className="relative">
+                <p className="font-black text-[80px] text-coffeeLight leading-[70px]">
+                  Frontend Developer
+                </p>
+                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
+              </div>
+              <div className="w-full relative mt-4">
+                <p className="w-full font-normal text-[30px] text-coffeeLight text-left">
+                  With Experience Of
+                </p>
+                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
+              </div>
+              <div className="w-full relative">
+                <p className="font-black text-[80px] text-coffeeLight leading-[70px] text-left">
+                  1.9 years
+                </p>
+                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
+              </div>
+            </div>
+            <div className="w-[60%] h-full flex justify-center items-center px-8 rightSide">
+              <div className="relative">
+                <p className="font-normal text-[30px] text-coffeeDark bg-coffeeLight px-2 w-fit">
+                  1.
+                </p>
+                <p className="font-normal text-[30px] text-coffeeLight mt-4">
+                  I love building tools that are user-friendly and delightful. I
+                  am experienced in creating responsive and mobile-friendly
+                  websites with cross-browser compatibility to ensure consistent
+                  user experience across different devices and browsers.
+                </p>
+                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
+              </div>
+            </div>
+          </div>
+          {/* <div className="cursor bg-coffeeLight w-[10px] h-[10px] rounded-full absolute top-0 left-0 z-10"></div> */}
+        </div>
+        <div className="bg-coffeeLight w-full h-[100vh] flex justify-center items-center relative section3"></div>
+      </section>
+    </>
   );
 };
 

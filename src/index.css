@@ -129,9 +129,14 @@
     font-style: normal;
     font-display: swap;
   }
-  
-  body {
-    /* font-family: "Poppins", sans-serif; */
+
+  @font-face {
+    font-family: 'Ananda Black';
+    src: url('./assets/fonts/AnandaBlack.ttf') format('truetype');
+  }
+
+  .anandaBlack{
+    font-family: 'Ananda Black';
   }
 
 .shrink {
@@ -167,4 +172,10 @@
   transform: rotateX(90deg) translateZ(-150px);  
   z-index: -1;
   -webkit-transform: rotateX(90deg) translateZ(-150px);  
+}
+
+.aboutBg {
+  background-image: url('./assets/images/rectangleBg.png');
+  background-repeat: repeat;
+  opacity: .1;
 }
