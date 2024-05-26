@@ -112,31 +112,42 @@ const Myself = () => {
         start: "top bottom-=200",
         end: "center bottom-=200",
         scrub: 1,
-        markers: true,
+        // markers: true,
       },
     });
+    gsap.fromTo(
+      ".section2Content",
+      {
+        opacity: 0.5,
+      },
+      {
+        opacity: 1,
+        duration: 1,
+        // delay: 1,
+      }
+    );
   }, []);
 
-//   useEffect(() => {
-//     if (window.innerWidth > 1023) {
-//         gsap.registerPlugin(ScrollTrigger);
-//         let ctx = gsap.context(() => {
-//             gsap.to(".leftPinned", {
-//                 scrollTrigger: {
-//                   start: "top 80px",
-//                   end: "bottom bottom",
-//                     trigger: ".leftPinned",
-//                     endTrigger: ".rightSide",
-//                     pinSpacing: false,
-//                     pin: true,
-//                     scrub: true,
-//                     markers: true,
-//                 },
-//             });
-//         }, containerRef);
-//         return () => ctx.revert();
-//     }
-// }, [window.innerWidth]);
+  useEffect(() => {
+    if (window.innerWidth > 1023) {
+      gsap.registerPlugin(ScrollTrigger);
+      let ctx = gsap.context(() => {
+        gsap.to(".leftPinned", {
+          scrollTrigger: {
+            start: "top 80px",
+            end: "bottom bottom",
+            trigger: ".leftPinned",
+            endTrigger: ".rightSide",
+            pinSpacing: false,
+            pin: true,
+            scrub: true,
+            // markers: true,
+          },
+        });
+      }, containerRef);
+      return () => ctx.revert();
+    }
+  }, [window.innerWidth]);
 
   return (
     <>
@@ -176,47 +187,63 @@ const Myself = () => {
             <div className="cursor bg-coffeeDark w-[10px] h-[10px] rounded-full absolute top-0 left-0"></div>
           </div>
         </div>
-        <div ref={containerRef} className="bg-coffeeLight w-full h-[100vh] flex justify-center items-center relative">
-          <div className="section2 w-[30%] h-full bg-coffeeDark overflow-hidden absolute z-0"></div>
-          <div className="w-full h-full flex justify-center items-center overflow-hidden section2Content z-10 px-16">
-            <div className="w-[40%] h-full flex flex-col justify-center items-center px-8 leftPinned">
-              <div className="w-full relative">
+        <div
+          ref={containerRef}
+          className="bg-coffeeLight w-full h-full flex justify-center items-center relative py-20"
+        >
+          <div className="section2 w-[30%] h-full bg-coffeeDark absolute z-0"></div>
+          <div className="w-full h-full flex justify-center items-start opacity-50 section2Content z-10 px-16">
+            <div className="w-[40%] h-full flex flex-col justify-start items-center gap-4 px-8 leftPinned">
+              <div className="w-full ">
                 <p className="w-full font-normal text-[30px] text-coffeeLight text-left">
                   I am a
                 </p>
-                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
               </div>
-              <div className="relative">
+              <div className="">
                 <p className="font-black text-[80px] text-coffeeLight leading-[70px]">
                   Frontend Developer
                 </p>
-                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
               </div>
-              <div className="w-full relative mt-4">
+              <div className="w-full">
                 <p className="w-full font-normal text-[30px] text-coffeeLight text-left">
                   With Experience Of
                 </p>
-                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
               </div>
-              <div className="w-full relative">
+              <div className="w-full ">
                 <p className="font-black text-[80px] text-coffeeLight leading-[70px] text-left">
                   1.9 years
                 </p>
-                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
               </div>
             </div>
-            <div className="w-[60%] h-full flex justify-center items-center px-8 rightSide">
-              <div className="relative">
-                <p className="font-normal text-[30px] text-coffeeDark bg-coffeeLight px-2 w-fit">
+            <div className="w-[60%] h-full flex flex-col justify-start items-center gap-12 px-8 rightSide">
+              <div className="">
+                <p className="font-medium text-[40px] text-coffeeLight mb-8">
+                  Overview:
+                </p>
+                <div className="flex justify-start items-start gap-4">
+                <p className="font-normal text-[24px] text-coffeeDark bg-coffeeLight px-2 w-fit h-fit">
                   1.
                 </p>
-                <p className="font-normal text-[30px] text-coffeeLight mt-4">
+                <p className="font-light text-[24px] text-coffeeLight">
                   I love building tools that are user-friendly and delightful. I
                   am experienced in creating responsive and mobile-friendly
                   websites with cross-browser compatibility to ensure consistent
                   user experience across different devices and browsers.
                 </p>
-                <div className="bg-coffeeDark w-full textReveal2 absolute top-0 left-0"></div>
+                </div>
+              </div>
+              <div className="flex justify-start items-start gap-4">
+                <p className="font-normal text-[24px] text-coffeeDark bg-coffeeLight px-2 w-fit">
+                  2.
+                </p>
+                <p className="font-light text-[24px] text-coffeeLight">
+                  I am experienced in integrating RESTful API's to facilitate
+                  seamless communication between the frontend and backend
+                  systems. This involved data retrieval and submission, ensuring
+                  efficient and secure transmission of information. Collaborated
+                  with backend developers to define API requirements and
+                  optimize performance for enhanced user experience.
+                </p>
               </div>
             </div>
           </div>
