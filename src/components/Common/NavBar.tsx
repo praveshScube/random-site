@@ -133,14 +133,14 @@ const NavBar = () => {
             : navIndex === 2
             ? "bg-[#e3fff2]"
             : navIndex === 3
-            ? "bg-black/80 backdrop-blur-lg"
+            ? "bg-bgBlack/90 backdrop-blur-lg"
             : navIndex === 4
             ? "bg-[#ffefed]"
             : `bg-[#fff3d4]`
         }`}
       >
-        <div
-          className={`md:flex hidden w-full h-10 relative flex-row justify-between items-center lg:px-24 md:px-16`}
+        {/* <div
+          className={`lg:flex hidden w-full h-10 relative flex-row justify-between items-center lg:px-24 md:px-16`}
         >
           <div
             className={`w-[100px] opacity-20 h-10 rounded-lg absolute top-[0px] left-[0px] ${
@@ -156,21 +156,52 @@ const NavBar = () => {
               className={({ isActive }) =>
                 isActive
                   ? `${item?.activeClasses} ${
-                      navIndex === 3 ? "text-coffeeLight" : ""
+                      navIndex === 3 ? "text-white" : ""
                     }`
                   : `${item?.baseClasses} ${
-                      navIndex === 3 ? "text-coffeeLight" : "text-fontBlack"
+                      navIndex === 3 ? "text-white" : "text-fontBlack"
                     }`
               }
               onClick={() => setNavIndex(index + 1)}
               to={`${item?.link}`}
             >
-              <div className="relative w-fit h-fit">
-                <div className="relative z-0">{item?.title}</div>
+              <div className="relative w-fit h-fit px-1">
+                <div className="relative z-10">{item?.title}</div>
                 <div
                   className={`${
                     navIndex === 3 && index === 2
-                      ? "h-[3px] bg-coffeeLight myselfBorder"
+                      ? "h-[46px] burningOrangeBg myselfBorder absolute -bottom-[6px] -left-[0px] z-0 -skew-x-12"
+                      : "hidden"
+                  }`}
+                ></div>
+              </div>
+            </NavLink>
+          ))}
+        </div> */}
+
+        <div
+          className={`w-full h-full flex justify-center items-center`}
+        >
+          {navLinks?.map((item: any, index: number) => (
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? `${item?.activeClasses} ${
+                      navIndex === 3 ? "text-white" : ""
+                    }`
+                  : `${item?.baseClasses} ${
+                      navIndex === 3 ? "text-white" : "text-fontBlack"
+                    }`
+              }
+              onClick={() => setNavIndex(index + 1)}
+              to={`${item?.link}`}
+            >
+              <div className="relative w-fit h-fit px-1">
+                <div className="relative z-10">{item?.title === "pravesh." ? item?.title : ""}</div>
+                <div
+                  className={`${
+                    navIndex === 3 && index === 2
+                      ? "h-[46px] burningOrangeBg myselfBorder absolute -bottom-[6px] -left-[0px] z-0 -skew-x-12"
                       : "hidden"
                   }`}
                 ></div>
@@ -181,43 +212,45 @@ const NavBar = () => {
 
         {/* Small Screen Menu */}
 
-        <div
-          onClick={!menu ? openToggleMenu : closeToggleMenu}
-          className="md:hidden flex w-full flex-col justify-center items-end gap-[6px] sm:px-10 px-6"
-        >
+        <div className="hidden">
           <div
-            className={`lineToRotate1 h-[3px] w-[30px] rounded-lg ${
-              navIndex === 3 ? "bg-coffeeLight" : "bg-black"
-            }`}
-          ></div>
-          <div
-            className={`lineToHide h-[3px] w-[22px] rounded-lg ${
-              navIndex === 3 ? "bg-coffeeLight" : "bg-black"
-            }`}
-          ></div>
-          <div
-            className={`lineToRotate2 h-[3px] w-[30px] rounded-lg ${
-              navIndex === 3 ? "bg-coffeeLight" : "bg-black"
-            }`}
-          ></div>
-        </div>
-        {menu && (
-          <div className="absolute top-[70px] left-0 w-full h-screen bg-[#131313] flex flex-col justify-start items-starts gap-14 menuWrapper pl-10 pt-8">
-            {navLinksMob?.map((item: any) => (
-              <NavLink
-                className={({ isActive }) =>
-                  isActive
-                    ? "text-coffeeLight menuLink font-bold text-[60px] cursor-pointer p-2"
-                    : "menuLink font-bold text-coffeeLight/40 text-[60px] cursor-pointer p-2"
-                }
-                onClick={() => setMenu(false)}
-                to={`${item?.link}`}
-              >
-                {item?.title}
-              </NavLink>
-            ))}
+            onClick={!menu ? openToggleMenu : closeToggleMenu}
+            className="lg:hidden flex w-full flex-col justify-center items-end gap-[6px] sm:px-10 px-6"
+          >
+            <div
+              className={`lineToRotate1 h-[3px] w-[30px] rounded-lg ${
+                navIndex === 3 ? "bg-orangeLight" : "bg-black"
+              }`}
+            ></div>
+            <div
+              className={`lineToHide h-[3px] w-[22px] rounded-lg ${
+                navIndex === 3 ? "bg-orangeLight" : "bg-black"
+              }`}
+            ></div>
+            <div
+              className={`lineToRotate2 h-[3px] w-[30px] rounded-lg ${
+                navIndex === 3 ? "bg-orangeLight" : "bg-black"
+              }`}
+            ></div>
           </div>
-        )}
+          {menu && (
+            <div className="absolute top-[70px] left-0 w-full h-screen bg-[#131313] flex flex-col justify-start items-starts gap-14 menuWrapper pl-10 pt-8">
+              {navLinksMob?.map((item: any) => (
+                <NavLink
+                  className={({ isActive }) =>
+                    isActive
+                      ? "text-orangeLight menuLink font-bold text-[60px] cursor-pointer p-2"
+                      : "menuLink font-bold text-orangeLight/40 text-[60px] cursor-pointer p-2"
+                  }
+                  onClick={() => setMenu(false)}
+                  to={`${item?.link}`}
+                >
+                  {item?.title}
+                </NavLink>
+              ))}
+            </div>
+          )}
+        </div>
       </nav>
     </>
   );

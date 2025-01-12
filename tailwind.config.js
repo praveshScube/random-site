@@ -52,8 +52,9 @@ module.exports = {
           lightGreen: "#e3fff2",
           red: '#ff5445',
           yellow: '#ffcc41',
-          coffeeDark: "#712D29",
-          coffeeLight: "#dbc1ac"
+          orangeDark: "#ff5029",
+          orangeLight: "#fff0ed",
+          bgBlack: "#000108",
       },
     },
   },

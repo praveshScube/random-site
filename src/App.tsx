@@ -6,6 +6,7 @@ import MySkills from "./components/MySkills/MySkills";
 import Projects from "./components/Projects/Projects";
 import Footer from "./components/Common/Footer";
 import Myself from "./components/Myself/Myself";
+import Demo from "./components/Demo/Demo";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/my-skills" element={<MySkills />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/myself" element={<Myself />} />
+        <Route path="/demo" element={<Demo />} />
       </Routes>
       <Footer />
     </>

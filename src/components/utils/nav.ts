@@ -14,8 +14,8 @@ export const navLinks = [
     {
         title: "pravesh.",
         link: "/myself",
-        activeClasses: "anandaBlack font-black text-4xl cursor-pointer p-2",
-        baseClasses: "anandaBlack font-black text-4xl cursor-pointer p-2"
+        activeClasses: "anandaBlack font-black text-3xl cursor-pointer p-2",
+        baseClasses: "anandaBlack font-black text-3xl cursor-pointer p-2"
     },
     {
         title: "My Skills",
